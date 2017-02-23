@@ -1,0 +1,39 @@
+*, *:after, *:before
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+
+.center
+  padding-left: 1.8rem
+  padding-right: 1.8rem
+
+header
+  background-color: #0071bc
+
+#logo, #site-name
+  display: block
+  float: left
+  clear: none
+
+#site-name
+  color: #fff
+  margin: 0.3em 0 0.3em 1em
+
+footer div
+  border-top: 1px solid #323a45
+
+/* Utility */
+.clearfix:before,
+.clearfix:after
+  content: " " /* 1 */
+  display: table /* 2 */
+
+.clearfix:after
+  clear: both
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix
+  *zoom: 1

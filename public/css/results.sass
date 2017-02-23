@@ -1,0 +1,42 @@
+#bill-results h2
+  margin-bottom: 1em
+  margin-top: 0.5em
+
+.bill-status-options,
+.bill-results--pager
+  display: block
+  margin: 0 0 1em
+  text-align: center
+
+.bill-status-options li,
+.bill-results--pager li
+  display: inline-block
+  margin-bottom: 0
+  margin-top: 0
+
+.bill-status-options li::before,
+.bill-results--pager li::before
+  content: ''
+
+.bill-status-options .active,
+.bill-results--pager .active
+  color: $black
+  font-weight: bold
+
+.bill-status-options li
+  list-style: none
+  margin: 0 5px
+
+.bill-status-options a
+  background-color: $primary-alt-lightest
+  border: 1px solid $black
+  border-radius: 20px
+  color: $black
+  padding: 6px 12px
+  text-decoration: none
+
+.bill-results--pager
+  font-size: 1.2em
+
+.bill-results--pager li
+  margin-right: 0.25em

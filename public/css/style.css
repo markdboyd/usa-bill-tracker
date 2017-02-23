@@ -1,0 +1,149 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.center {
+  padding-left: 1.8rem;
+  padding-right: 1.8rem; }
+
+header {
+  background-color: #0071bc; }
+
+#logo, #site-name {
+  display: block;
+  float: left;
+  clear: none; }
+
+#site-name {
+  color: #fff;
+  margin: 0.3em 0 0.3em 1em; }
+
+footer div {
+  border-top: 1px solid #323a45; }
+
+/* Utility */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix {
+  *zoom: 1; }
+
+label {
+  margin-bottom: 5px; }
+
+.form-item {
+  margin-right: 1.8em;
+  margin-bottom: 1em; }
+
+.form-item--checkboxes {
+  float: left; }
+
+.form-item--select {
+  min-width: 200px; }
+
+.form-submit {
+  clear: both; }
+
+#recent-searches {
+  display: none;
+  margin-top: 1em; }
+
+#recent-searches span {
+  font-style: italic; }
+
+#recent-searches a {
+  display: block; }
+
+#bill-results h2 {
+  margin-bottom: 1em;
+  margin-top: 0.5em; }
+
+.bill-status-options,
+.bill-results--pager {
+  display: block;
+  margin: 0 0 1em;
+  text-align: center; }
+
+.bill-status-options li,
+.bill-results--pager li {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-top: 0; }
+
+.bill-status-options li::before,
+.bill-results--pager li::before {
+  content: ''; }
+
+.bill-status-options .active,
+.bill-results--pager .active {
+  color: #000;
+  font-weight: bold; }
+
+.bill-status-options li {
+  list-style: none;
+  margin: 0 5px; }
+
+.bill-status-options a {
+  background-color: #e1f3f8;
+  border: 1px solid #000;
+  border-radius: 20px;
+  color: #000;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.bill-results--pager {
+  font-size: 1.2em; }
+
+.bill-results--pager li {
+  margin-right: 0.25em; }
+
+.bill-info {
+  background-color: #f1f1f1;
+  border: 1px solid #323a45;
+  margin-bottom: 1em;
+  padding: 10px; }
+
+.bill-info--label {
+  font-weight: bold; }
+
+.bill-info--date {
+  display: block; }
+
+.bill-info--last-action {
+  margin-bottom: 0.5em; }
+
+.bill-info--tag {
+  display: inline-block;
+  border: 1px solid #323a45;
+  border-radius: 3px;
+  cursor: pointer;
+  font-style: italic;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  padding: 1px 7px;
+  text-decoration: none; }
+
+.bill-info--tag:hover {
+  background-color: #205493;
+  border: 1px solid #205493;
+  color: #fff; }
+
+.bill-info--tag--type {
+  background-color: #fff1d2;
+  color: #000; }
+
+.bill-info--summary {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em; }

@@ -1,0 +1,99 @@
+extends layout
+
+block content
+  script#usaBillTrackerData
+    = `${billTrackerData}`
+
+  form(id='billSearchForm' action='/' method='GET' class='clearfix')
+    div(class='form-item form-item--text' role='search')
+      label(for='query') Issue/topic
+      input(id='query' name='query' placeholder='Enter search terms' value= queryParams.query)
+      div#recent-searches
+        span Recent searches:
+
+    div(class='form-item form-item--checkboxes')
+      label(class='info-label' for='congress' title='Click to learn more about Congressional session numbers')
+        a(class='info-link' href='http://www.senate.gov/reference/Sessions/sessionDates.htm') Congress session number
+      fieldset(class='usa-fieldset-inputs usa-sans')
+        legend(class='usa-sr-only') Congress session number
+        ul(class='usa-unstyled-list')
+          each val in options.congressSessions
+            li
+              input(
+                type='checkbox'
+                name='congress[]'
+                id=`congress-${val.number}`
+                value= val.number
+                checked=(queryValueExists(queryParams, 'congress', val.number, true) ? 'checked' : undefined))
+              label(for=`congress-${val.number}`)= val.label
+
+    div(class='form-item form-item--checkboxes')
+      label(for='billType' title='Click to learn more about types of legislation')
+        a(href='http://www.senate.gov/legislative/common/briefing/leg_laws_acts.htm') Type of legislation
+      fieldset(class='usa-fieldset-inputs usa-sans')
+        legend(class='usa-sr-only') Type of legislation
+        ul(class='usa-unstyled-list')
+          each val in options.billTypes
+            li
+              input(
+                type='checkbox'
+                name='billType[]'
+                id=`billType-${val.type}`
+                value= val.type
+                checked=(queryValueExists(queryParams, 'billType', val.type, true) ? 'checked' : undefined))
+              label(for=`billType-${val.type}`)= val.label
+
+    input(type='submit' value='Search bills' class='form-submit')
+
+  div#bill-results
+  if (billsData)
+    h2 Results
+    ul(class='bill-status-options')
+      - var currentBillStatus = queryParams.billStatus || 'introduced';
+      each label, billStatus in billStatuses
+        li
+          a(
+            title= `Show bills with a status of ${billStatus}`
+            class=(billStatus == currentBillStatus) ? 'active' : ''
+            href= buildQueryString(queryParams, 'billStatus', billStatus))
+              = ` ${label} (${billsData[billStatus].count})`
+    if billsData.bills.count > resultsPerPage
+      - var pageCount = Math.ceil(billsData.bills.count / resultsPerPage);
+      - var n = 1;
+      - var currentPage = queryParams.page || 1;
+      ul(class='bill-results--pager')
+        while n <= pageCount
+          li
+            a(
+              class=(n == currentPage) ? 'active': ''
+              href= buildQueryString(queryParams, 'page', n))
+              = n++
+
+    div(class='bill-results--container clearfix')
+      if billsData.bills.results.length === 0
+        p= `There are no bills of this status matching your search parameters.`
+      else
+        each bill in billsData.bills.results
+          div(class='bill-info')
+            p
+              a(href=bill.urls.congress)= bill.short_title ? bill.short_title : bill.bill_id.toUpperCase()
+            span(class='bill-info--date')
+              span(class='bill-info--label') Introduced on:
+              = ` ${bill.introduced_on}`
+            span(class='bill-info--date bill-info--last-action')
+              span(class='bill-info--label') Last action on:
+              = ` ${bill.last_action_at}`
+            if bill.summary_short
+              p(class='bill-info--summary')
+                span(class='bill-info--label') Summary:
+                = ` ${bill.summary_short}`
+            if bill.last_action
+              p(class='bill-info--summary')
+                span(class='bill-info--label') Last action:
+                = ` ${bill.last_action.text}`
+            a(
+              class='bill-info--tag bill-info--tag--type'
+              title= `Type of legislation: ${billTypes[bill.bill_type]}`
+              data-option-id= `billType-${bill.bill_type}`
+              href= buildQueryString(queryParams, 'billType', bill.bill_type, true))
+              = bill.bill_type
