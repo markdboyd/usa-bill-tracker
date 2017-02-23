@@ -9,9 +9,13 @@ module.exports.homepage = homepage;
 
 function homepage(req, res, next) {
   getBillsData(req.query).then(function(billsData) {
+    var query = req.query.query;
+    if (query) {
+      query = he.encode(query);
+    }
     var billTrackerData = JSON.stringify({
       currentSearch: {
-        query: he.encode(req.query.query),
+        query: query,
         congress: req.query.congress,
         billType: req.query.billType
       }
